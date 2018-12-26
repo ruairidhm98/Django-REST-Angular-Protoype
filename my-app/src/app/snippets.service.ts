@@ -15,8 +15,8 @@ const httpOptions = {
 @Injectable({ providedIn: 'root' }) 
 export class SnippetsService {
 
-  // private restUrl = "http://127.0.0.1:8000/snippets/";
-  private restUrl = "../assets/data/snippets.json";
+  private restUrl = "http://127.0.0.1:8000/snippets/";
+  //private restUrl = "../assets/data/snippets.json";
 
   constructor(
     private http: HttpClient,
