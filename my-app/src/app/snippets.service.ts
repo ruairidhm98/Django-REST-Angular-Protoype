@@ -15,20 +15,23 @@ const httpOptions = {
 @Injectable({ providedIn: 'root' }) 
 export class SnippetsService {
 
-  private restUrl = "http://127.0.0.1:8000/snippets/";
+  // private restUrl = "http://127.0.0.1:8000/snippets/";
+  private restUrl = "../assets/data/snippets.json";
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
 
   getSnippets(): Observable<Snippet[]>{
-    return this.http.get<Snippet[]>(this.restUrl);
-      /*.pipe(
+    return this.http.get<any>(this.restUrl)
+      .pipe(
         tap(_ => this.log('fetched snippets')),
-        catchError(this.handleError('getSnippets', []))
-      );*/
+        catchError(
+          this.handleError('getSnippets', [])
+          )
+      );
   }
-
+  
   getSnippetNo404<Data>(id: number): Observable<Snippet> {
     const url = `${this.restUrl}/?id=${id}`;
     return this.http.get<Snippet[]>(url)
