@@ -12,7 +12,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: 'root' }) 
 export class SnippetsService {
 
   private restUrl = "http://127.0.0.1:8000/snippets/";
@@ -22,11 +22,11 @@ export class SnippetsService {
     private messageService: MessageService) { }
 
   getSnippets(): Observable<Snippet[]>{
-    return this.http.get<Snippet[]>(this.restUrl)
-      .pipe(
+    return this.http.get<Snippet[]>(this.restUrl);
+      /*.pipe(
         tap(_ => this.log('fetched snippets')),
         catchError(this.handleError('getSnippets', []))
-      );
+      );*/
   }
 
   getSnippetNo404<Data>(id: number): Observable<Snippet> {

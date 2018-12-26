@@ -14,6 +14,10 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { MessagesComponent } from './messages/messages.component';
 import { SnippetsComponent } from './snippets/snippets.component';
 import { SnippetSearchComponent } from './snippet-search/snippet-search.component';
+import { CreateComponent } from './create/create.component';
+import { RetrieveComponent } from './retrieve/retrieve.component';
+import { UpdateComponent } from './update/update.component';
+import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
   imports: [
@@ -38,6 +42,10 @@ import { SnippetSearchComponent } from './snippet-search/snippet-search.componen
     HeroSearchComponent,
     SnippetsComponent,
     SnippetSearchComponent,
+    CreateComponent,
+    RetrieveComponent,
+    UpdateComponent,
+    DeleteComponent,
   ],
   bootstrap: [AppComponent]
 })

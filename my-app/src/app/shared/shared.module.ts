@@ -15,7 +15,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
   ],
   exports: [
     MenuComponent,
-    HeaderComponent
+    HeaderComponent,
+    BreadcrumbComponent
   ]
 })
 export class SharedModule { }
