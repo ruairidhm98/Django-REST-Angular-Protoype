@@ -1,22 +1,23 @@
+import { Snippet } from './snippet';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Snippet } from './snippet';
 import { MessageService } from './message.service';
 
-
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({
+    'content-type':' multipart/form-data',
+    'Authorization': 'Basic dGVzdDphbmd1bGFy'
+  })
 };
 
 @Injectable({ providedIn: 'root' }) 
 export class SnippetsService {
 
   private restUrl = "http://127.0.0.1:8000/snippets/";
-  //private restUrl = "../assets/data/snippets.json";
 
   constructor(
     private http: HttpClient,
@@ -69,8 +70,8 @@ export class SnippetsService {
   //////// Save methods //////////
 
   /** POST: add a new snippet to the server */
-  addSnippet(snippet: Snippet): Observable<Snippet> {
-    return this.http.post<Snippet>(this.restUrl, snippet, httpOptions).pipe(
+  addSnippet(code: string): Observable<Snippet> {
+    return this.http.post(this.restUrl, code, httpOptions).pipe(
       tap((snippet: Snippet) => this.log(`added snippet w/ id=${snippet.id}`)),
       catchError(this.handleError<Snippet>('addSnippet'))
     );

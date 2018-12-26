@@ -1,5 +1,4 @@
 import { SnippetsService } from './../snippets.service';
-import { Snippet } from './../snippet';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,7 +13,7 @@ export class RetrieveComponent implements OnInit {
   constructor(private snippetService: SnippetsService) { }
 
   ngOnInit() {
-    this.snippetService.getSnippets()
+    this.snippetService.addSnippet("print(123")
         .subscribe(
           data => {
             this.snippets = data;
