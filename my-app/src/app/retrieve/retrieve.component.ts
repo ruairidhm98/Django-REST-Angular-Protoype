@@ -1,5 +1,6 @@
 import { SnippetsService } from './../snippets.service';
 import { Component, OnInit } from '@angular/core';
+import { Snippet } from '../snippet';
 
 @Component({
   selector: 'app-retrieve',
@@ -10,10 +11,17 @@ export class RetrieveComponent implements OnInit {
 
   public snippets: any;
 
-  constructor(private snippetService: SnippetsService) { }
+  constructor(private snippetsService: SnippetsService) { }
 
   ngOnInit() {
-    this.snippetService.addSnippet("print(123")
+    let snippet = new Snippet();
+    snippet.title = "";
+    snippet.id = 10;
+    snippet.code = "print(123)";
+    snippet.linenos = false;
+    snippet.language = "python";
+    snippet.style = "friendly";
+    this.snippetsService.addSnippet(snippet) 
         .subscribe(
           data => {
             this.snippets = data;

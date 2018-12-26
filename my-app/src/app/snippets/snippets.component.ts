@@ -23,9 +23,15 @@ export class SnippetsComponent implements OnInit {
       .subscribe(snippets => this.snippets = snippets);
   }
 
-  add(code: string): void {
-
-    this.snippetsService.addSnippet(code)
+  add(): void {
+    let snippet = new Snippet();
+    snippet.title = "";
+    snippet.id = 10;
+    snippet.code = "print(123)";
+    snippet.linenos = false;
+    snippet.language = "python";
+    snippet.style = "friendly";
+    this.snippetsService.addSnippet(snippet)
         .subscribe(snippet => {
           this.snippets.push(snippet);
         });
