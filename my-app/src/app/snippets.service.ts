@@ -34,8 +34,8 @@ export class SnippetsService {
     return this.http.get<Snippet[]>(url)
       .pipe(
         map(snippet => snippet[0]), // returns a {0|1} element array
-        tap(h => {
-          const outcome = h ? `fetched` : `did not find`;
+        tap(s => {
+          const outcome = s ? `fetched` : `did not find`;
           this.log(`${outcome} snippet id=${id}`);
         }),
         catchError(this.handleError<Snippet>(`getSnippet id=${id}`))
@@ -51,10 +51,10 @@ export class SnippetsService {
     );
   }
 
-  /* GET heroes whose name contains search term */
+  /* GET snippets whose name contains search term */
   searchSnippet(term: string): Observable<Snippet[]> {
     if (!term.trim()) {
-      // if not search term, return empty hero array.
+      // if not search term, return empty snippets array.
       return of([]);
     }
     return this.http.get<Snippet[]>(`${this.restUrl}/?name=${term}`).pipe(
@@ -65,30 +65,30 @@ export class SnippetsService {
   
   //////// Save methods //////////
 
-  /** POST: add a new hero to the server */
-  addHero(hero: Snippet): Observable<Snippet> {
-    return this.http.post<Snippet>(this.restUrl, hero, httpOptions).pipe(
-      tap((hero: Snippet) => this.log(`added snippet w/ id=${hero.id}`)),
+  /** POST: add a new snippet to the server */
+  addSnippet(snippet: Snippet): Observable<Snippet> {
+    return this.http.post<Snippet>(this.restUrl, snippet, httpOptions).pipe(
+      tap((snippet: Snippet) => this.log(`added snippet w/ id=${snippet.id}`)),
       catchError(this.handleError<Snippet>('addSnippet'))
     );
   }
 
-  /** DELETE: delete the hero from the server */
-  deleteHero(snippet: Snippet | number): Observable<Snippet> {
+  /** DELETE: delete the snippet from the server */
+  deleteSnippet(snippet: Snippet | number): Observable<Snippet> {
     const id = typeof snippet === 'number' ? snippet : snippet.id;
     const url = `${this.restUrl}/${id}`;
 
     return this.http.delete<Snippet>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted hero id=${id}`)),
+      tap(_ => this.log(`deleted snippet id=${id}`)),
       catchError(this.handleError<Snippet>('deleteSnippet'))
     );
   }
 
-  /** PUT: update the hero on the server */
-  updateHero(snippet: Snippet): Observable<any> {
+  /** PUT: update the snippet on the server */
+  updateSnippet(snippet: Snippet): Observable<any> {
     return this.http.put(this.restUrl, snippet, httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${snippet.id}`)),
-      catchError(this.handleError<any>('updateHero'))
+      tap(_ => this.log(`updated snippet id=${snippet.id}`)),
+      catchError(this.handleError<any>('updateSnippet'))
     );
   }
 
@@ -112,7 +112,7 @@ export class SnippetsService {
     };
   }
 
-  /** Log a HeroService message with the MessageService */
+  /** Log a SnippetService message with the MessageService */
   private log(message: string) {
     this.messageService.add(`SnippetService: ${message}`);
   }
