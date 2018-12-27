@@ -5,7 +5,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { MessageService } from './message.service';
 
 @Injectable({providedIn: 'root'})
 export class SnippetsService {
@@ -16,14 +15,12 @@ export class SnippetsService {
     'Authorization': 'Basic dGVzdDphbmd1bGFy'
   };
 
-  constructor(
-    private http: HttpClient,
-    private messageService: MessageService) { }
+  constructor(private http: HttpClient) { }
 
   getSnippets(): Observable<Snippet[]> {
     return this.http.get<any>(this.restUrl)
       .pipe(
-        tap(_ => this.log('fetched snippets')),
+        tap(_ => console.log('fetched snippets')),
         catchError(
           this.handleError('getSnippets', [])
           )
@@ -37,7 +34,7 @@ export class SnippetsService {
         map(snippet => snippet[0]), // returns a {0|1} element array
         tap(s => {
           const outcome = s ? `fetched` : `did not find`;
-          this.log(`${outcome} snippet id=${id}`);
+          console.log(`${outcome} snippet id=${id}`);
         }),
         catchError(this.handleError<Snippet>(`getSnippet id=${id}`))
       );
@@ -47,7 +44,7 @@ export class SnippetsService {
   getSnippet(id: number): Observable<Snippet> {
     const url = `${this.restUrl}/${id}`;
     return this.http.get<Snippet>(url).pipe(
-      tap(_ => this.log(`fetched snippet id=${id}`)),
+      tap(_ => console.log(`fetched snippet id=${id}`)),
       catchError(this.handleError<Snippet>(`getSnippet id=${id}`))
     );
   }
@@ -59,7 +56,7 @@ export class SnippetsService {
       return of([]);
     }
     return this.http.get<Snippet[]>(`${this.restUrl}/?name=${term}`).pipe(
-      tap(_ => this.log(`found snippet matching "${term}"`)),
+      tap(_ => console.log(`found snippet matching "${term}"`)),
       catchError(this.handleError<Snippet[]>('searchSnippets', []))
     );
   }
@@ -71,7 +68,7 @@ export class SnippetsService {
     const headers = {'headers': this.headers};
     const request = this.http.post<any>(this.restUrl, snippet, headers);
     return request.pipe(
-      tap((s: Snippet) => this.log(`added snippet w/ id=${s.id}`)),
+      tap((s: Snippet) => console.log(`added snippet w/ id=${s.id}`)),
       catchError(this.handleError<Snippet>('addSnippet')));
   }
 
@@ -81,7 +78,7 @@ export class SnippetsService {
     const url = `${this.restUrl}/${id}`;
     const headers = {'headers' : this.headers};
     return this.http.delete<Snippet>(url, headers).pipe(
-      tap(_ => this.log(`deleted snippet id=${id}`)),
+      tap(_ => console.log(`deleted snippet id=${id}`)),
       catchError(this.handleError<Snippet>('deleteSnippet'))
     );
   }
@@ -90,7 +87,7 @@ export class SnippetsService {
   updateSnippet(snippet: Snippet): Observable<any> {
     const headers = { 'headers': this.headers };
     return this.http.put(this.restUrl, snippet, headers).pipe(
-      tap(_ => this.log(`updated snippet id=${snippet.id}`)),
+      tap(_ => console.log(`updated snippet id=${snippet.id}`)),
       catchError(this.handleError<any>('updateSnippet'))
     );
   }
@@ -105,19 +102,14 @@ export class SnippetsService {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      console.log(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+      console.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
-  }
-
-  /** Log a SnippetService message with the MessageService */
-  private log(message: string) {
-    this.messageService.add(`SnippetService: ${message}`);
   }
 
 }

@@ -6,10 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SnippetsComponent } from './snippets/snippets.component';
-import { CreateComponent } from './create/create.component';
-import { RetrieveComponent } from './retrieve/retrieve.component';
-import { UpdateComponent } from './update/update.component';
-import { DeleteComponent } from './delete/delete.component';
+import { CreateComponent } from './snippetsCRUD/create/create.component';
+import { RetrieveComponent } from './snippetsCRUD/retrieve/retrieve.component';
+import { UpdateComponent } from './snippetsCRUD/update/update.component';
+import { DeleteComponent } from './snippetsCRUD/delete/delete.component';
 
 @NgModule({
   imports: [
@@ -18,12 +18,6 @@ import { DeleteComponent } from './delete/delete.component';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   InMemoryDataService, { dataEncapsulation: false }
-    // )
   ],
   declarations: [
     AppComponent,
