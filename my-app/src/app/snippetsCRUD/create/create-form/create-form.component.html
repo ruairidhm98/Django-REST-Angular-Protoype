@@ -1,0 +1,61 @@
+<div>
+  <form [formGroup]='createForm' (ngSubmit)='createSnippet(createForm.value)'>
+    <div class="row">
+      <div class="col-12 col-sm-4 col-lg-6">
+        <label>Code</label>
+        <input type="text" 
+               class="form-control"   
+               formControlName="code"        
+               autocomplete="off"   
+               placeholder="">
+               <div class="error" *ngIf="!field('code').valid && field('code').dirty">This field is required</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-4 col-lg-6">
+        <label>Title</label>
+        <input type="text" 
+               class="form-control"   
+               formControlName="title" 
+               autocomplete="off"   
+               placeholder="">
+              <div class="error" *ngIf="!field('title').valid">This field is required</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-4 col-lg-6">
+        <label>Language</label>
+        <input type="text" 
+               class="form-control"   
+               formControlName="language"        
+               autocomplete="off"   
+               placeholder="">
+              <div class="error" *ngIf="!field('language').valid">This field is required</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-4 col-lg-6">
+        <label>Style</label>
+        <input type="text" 
+               class="form-control"   
+               formControlName="style"        
+               autocomplete="off"   
+               placeholder="">
+              <div class="error" *ngIf="!field('style').valid">This field is required</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-4 col-lg-6">
+        <label>API Token</label>
+        <input type="text" 
+               class="form-control"   
+               formControlName="token"         
+               autocomplete="off"   
+               placeholder="">
+              <div class="error" *ngIf="!field('token').valid">This field is required</div>
+      </div>
+    </div>
+    <br>
+    <button class="btn btn-info" [disabled]="!createForm.valid">Submit</button>
+  </form>
+</div>

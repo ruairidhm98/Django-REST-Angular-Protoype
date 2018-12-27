@@ -14,16 +14,10 @@ export class RetrieveComponent implements OnInit {
   constructor(private snippetsService: SnippetsService) { }
 
   ngOnInit() {
-    const snippet = new Snippet();
-    snippet.title = '';
-    snippet.id = 10;
-    snippet.code = 'print(123)';
-    snippet.linenos = false;
-    snippet.language = 'python';
-    snippet.style = 'friendly';
+    /*const snippet = new Snippet('print("123")', '', false, 'python', 'friendly');
     this.snippetsService.addSnippet(snippet)
       .subscribe(data => {
           this.snippets = data;
-      });
+      });*/
   }
 }

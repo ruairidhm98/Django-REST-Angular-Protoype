@@ -22,17 +22,26 @@ export class SnippetsComponent implements OnInit {
       .subscribe(snippets => this.snippets = snippets);
   }
 
-  add(): void {
-    const snippet = new Snippet('print(123)', '', false, 'python', 'friendly');
-    this.snippetsService.addSnippet(snippet)
-        .subscribe(s => {
-          this.snippets.push(s);
-        });
+  add(code: string, title: string, language: string, style: string, token: string): void {
+    const snippet = new Snippet(code, title, false, language, style);
+    this.snippetsService.addSnippet(snippet, token)
+      .subscribe(s => {
+        this.snippets.push(s);
+      });
   }
 
-  delete(snippet: Snippet): void {
+  update(code: string, title: string, language: string, style: string, token: string) {
+    const snippet = new Snippet(code, title, false, language, style);
+    this.snippetsService.updateSnippet(snippet, token)
+      .subscribe(s => {
+        this.snippets.push(s);
+      });
+  }
+
+  delete(snippet: Snippet, token: string): void {
     this.snippets = this.snippets.filter(s => s !== snippet);
-    this.snippetsService.deleteSnippet(snippet).subscribe();
+    this.snippetsService.deleteSnippet(snippet, token)
+      .subscribe();
   }
 
 }

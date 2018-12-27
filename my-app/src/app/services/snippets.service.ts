@@ -10,10 +10,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class SnippetsService {
 
   private restUrl = 'http://127.0.0.1:8000/snippets/';
-  private headers: any = {
-    'content-type': 'application/json',
-    'Authorization': 'Basic dGVzdDphbmd1bGFy'
-  };
 
   constructor(private http: HttpClient) { }
 
@@ -64,8 +60,14 @@ export class SnippetsService {
   //////// Save methods //////////
 
   /** POST: add a new snippet to the server */
-  addSnippet(snippet: Snippet): Observable<Snippet> {
-    const headers = {'headers': this.headers};
+  addSnippet(snippet: Snippet, token: string): Observable<Snippet> {
+    const headers = {'headers':
+      {
+        'content-type': 'application/json',
+        'Authorization': 'Basic ' + token
+      }
+    };
+    console.log(snippet, token);
     const request = this.http.post<any>(this.restUrl, snippet, headers);
     return request.pipe(
       tap((s: Snippet) => console.log(`added snippet w/ id=${s.id}`)),
@@ -73,19 +75,28 @@ export class SnippetsService {
   }
 
   /** DELETE: delete the snippet from the server */
-  deleteSnippet(snippet: Snippet | number): Observable<Snippet> {
+  deleteSnippet(snippet: Snippet | number, token: string): Observable<Snippet> {
     const id = typeof snippet === 'number' ? snippet : snippet.id;
     const url = `${this.restUrl}/${id}`;
-    const headers = {'headers' : this.headers};
-    return this.http.delete<Snippet>(url, headers).pipe(
+    const headers = { 'headers':
+      {
+        'content-type': 'application/json',
+        'Authorization': 'Basic ' + token
+      }
+    };    return this.http.delete<Snippet>(url, headers).pipe(
       tap(_ => console.log(`deleted snippet id=${id}`)),
       catchError(this.handleError<Snippet>('deleteSnippet'))
     );
   }
 
   /** PUT: update the snippet on the server */
-  updateSnippet(snippet: Snippet): Observable<any> {
-    const headers = { 'headers': this.headers };
+  updateSnippet(snippet: Snippet, token: string): Observable<any> {
+    const headers = { 'headers':
+      {
+        'content-type': 'application/json',
+        'Authorization': 'Basic ' + token
+      }
+    };
     return this.http.put(this.restUrl, snippet, headers).pipe(
       tap(_ => console.log(`updated snippet id=${snippet.id}`)),
       catchError(this.handleError<any>('updateSnippet'))

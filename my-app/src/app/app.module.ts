@@ -1,7 +1,7 @@
 import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +10,7 @@ import { CreateComponent } from './snippetsCRUD/create/create.component';
 import { RetrieveComponent } from './snippetsCRUD/retrieve/retrieve.component';
 import { UpdateComponent } from './snippetsCRUD/update/update.component';
 import { DeleteComponent } from './snippetsCRUD/delete/delete.component';
+import { CreateFormComponent } from './snippetsCRUD/create/create-form/create-form.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { DeleteComponent } from './snippetsCRUD/delete/delete.component';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
@@ -26,6 +28,7 @@ import { DeleteComponent } from './snippetsCRUD/delete/delete.component';
     RetrieveComponent,
     UpdateComponent,
     DeleteComponent,
+    CreateFormComponent,
   ],
   bootstrap: [AppComponent]
 })

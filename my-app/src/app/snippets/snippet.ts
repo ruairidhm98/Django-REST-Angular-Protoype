@@ -1,4 +1,4 @@
-let nextId = 0;
+let nextId = 10;
 
 export class Snippet {
   code: string;
