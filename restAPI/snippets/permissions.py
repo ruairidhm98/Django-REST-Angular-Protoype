@@ -1,4 +1,5 @@
 from rest_framework import permissions
+from django.contrib.auth.models import User
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
     """
@@ -10,6 +11,5 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         # so we'l always allow GET, HEAD, or OPTIONS requests.
         if request.method in permissions.SAFE_METHODS:
             return True
-        superuser = User.objects.all(is_superuser=True)
-        
-        return request.user == superuser
+
+        return request.user.is_superuser
