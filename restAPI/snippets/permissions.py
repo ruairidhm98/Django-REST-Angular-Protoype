@@ -11,4 +11,5 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         superuser = User.objects.all(is_superuser=True)
+        
         return request.user == superuser
