@@ -1,4 +1,4 @@
-import { Snippet } from './snippet';
+import { Snippet } from './../snippets/snippet';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -7,29 +7,20 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { MessageService } from './message.service';
 
-/*
-const httpOptions = {
-  headers: new HttpHeaders({
-    'content-type':' multipart/form-data',
-    'Authorization': 'Basic dGVzdDphbmd1bGFy'
-  })
-};*/
-
-@Injectable({ providedIn: 'root' }) 
+@Injectable({providedIn: 'root'})
 export class SnippetsService {
 
-  private restUrl = "http://127.0.0.1:8000/snippets/";
+  private restUrl = 'http://127.0.0.1:8000/snippets/';
   private headers: any = {
     'content-type': 'application/json',
     'Authorization': 'Basic dGVzdDphbmd1bGFy'
   };
-  
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
 
-  getSnippets(): Observable<Snippet[]>{
+  getSnippets(): Observable<Snippet[]> {
     return this.http.get<any>(this.restUrl)
       .pipe(
         tap(_ => this.log('fetched snippets')),
@@ -38,7 +29,7 @@ export class SnippetsService {
           )
       );
   }
-  
+
   getSnippetNo404<Data>(id: number): Observable<Snippet> {
     const url = `${this.restUrl}/?id=${id}`;
     return this.http.get<Snippet[]>(url)
@@ -72,24 +63,23 @@ export class SnippetsService {
       catchError(this.handleError<Snippet[]>('searchSnippets', []))
     );
   }
-  
+
   //////// Save methods //////////
 
   /** POST: add a new snippet to the server */
   addSnippet(snippet: Snippet): Observable<Snippet> {
-    let headers = {"headers": this.headers};
-    let request = this.http.post<any>(this.restUrl, snippet, headers);
+    const headers = {'headers': this.headers};
+    const request = this.http.post<any>(this.restUrl, snippet, headers);
     return request.pipe(
-      tap((snippet: Snippet) => this.log(`added snippet w/ id=${snippet.id}`)),
+      tap((s: Snippet) => this.log(`added snippet w/ id=${s.id}`)),
       catchError(this.handleError<Snippet>('addSnippet')));
   }
 
   /** DELETE: delete the snippet from the server */
   deleteSnippet(snippet: Snippet | number): Observable<Snippet> {
-    
     const id = typeof snippet === 'number' ? snippet : snippet.id;
     const url = `${this.restUrl}/${id}`;
-    let headers = {"headers" : this.headers};
+    const headers = {'headers' : this.headers};
     return this.http.delete<Snippet>(url, headers).pipe(
       tap(_ => this.log(`deleted snippet id=${id}`)),
       catchError(this.handleError<Snippet>('deleteSnippet'))
@@ -98,7 +88,7 @@ export class SnippetsService {
 
   /** PUT: update the snippet on the server */
   updateSnippet(snippet: Snippet): Observable<any> {
-    let headers = { "headers": this.headers };
+    const headers = { 'headers': this.headers };
     return this.http.put(this.restUrl, snippet, headers).pipe(
       tap(_ => this.log(`updated snippet id=${snippet.id}`)),
       catchError(this.handleError<any>('updateSnippet'))

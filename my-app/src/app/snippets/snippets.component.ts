@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Snippet } from '../snippet';
-import { SnippetsService } from '../snippets.service';
+import { Snippet} from './../snippets/snippet';
+import { SnippetsService } from '../services/snippets.service';
 
 @Component({
   selector: 'app-snippets',
@@ -9,7 +9,6 @@ import { SnippetsService } from '../snippets.service';
   styleUrls: ['./snippets.component.css']
 })
 export class SnippetsComponent implements OnInit {
-  
   snippets: Snippet[];
 
   constructor(private snippetsService: SnippetsService) { }
@@ -18,22 +17,22 @@ export class SnippetsComponent implements OnInit {
     this.getSnippets();
   }
 
-  getSnippets() : void {
+  getSnippets(): void {
     this.snippetsService.getSnippets()
       .subscribe(snippets => this.snippets = snippets);
   }
 
   add(): void {
-    let snippet = new Snippet();
-    snippet.title = "";
+    const snippet = new Snippet();
+    snippet.title = '';
     snippet.id = 10;
-    snippet.code = "print(123)";
+    snippet.code = 'print(123)';
     snippet.linenos = false;
-    snippet.language = "python";
-    snippet.style = "friendly";
+    snippet.language = 'python';
+    snippet.style = 'friendly';
     this.snippetsService.addSnippet(snippet)
-        .subscribe(snippet => {
-          this.snippets.push(snippet);
+        .subscribe(s => {
+          this.snippets.push(s);
         });
   }
 
