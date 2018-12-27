@@ -6,7 +6,6 @@ from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
 from rest_framework import permissions
 from django.contrib.auth.models import User
-from snippets.permissions import IsOwnerOrReadOnly
 
 
 @api_view
@@ -26,7 +25,7 @@ class SnippetList(generics.ListCreateAPIView):
 
 
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+
