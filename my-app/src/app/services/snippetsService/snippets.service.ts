@@ -16,7 +16,7 @@ export class SnippetsService {
   getSnippets(): Observable<Snippet[]> {
     return this.http.get<any>(this.restUrl)
       .pipe(
-        tap(_ => console.log('fetched snippets')),
+        tap(_ => alert('fetched snippets')),
         catchError(
           this.handleError('getSnippets', [])
           )
@@ -30,7 +30,7 @@ export class SnippetsService {
         map(snippet => snippet[0]), // returns a {0|1} element array
         tap(s => {
           const outcome = s ? `fetched` : `did not find`;
-          console.log(`${outcome} snippet id=${id}`);
+          alert(`${outcome} snippet id=${id}`);
         }),
         catchError(this.handleError<Snippet>(`getSnippet id=${id}`))
       );
@@ -70,7 +70,7 @@ export class SnippetsService {
     console.log(snippet, token);
     const request = this.http.post<any>(this.restUrl, snippet, headers);
     return request.pipe(
-      tap((s: Snippet) => console.log(`added snippet w/ id=${s.id}`)),
+      tap((s: Snippet) => alert(`added snippet w/ id=${s.id}`)),
       catchError(this.handleError<Snippet>('addSnippet')));
   }
 
@@ -85,21 +85,23 @@ export class SnippetsService {
     };    
     console.log(url);
     return this.http.delete<Snippet>(url, headers).pipe(
-      tap(_ => console.log(`deleted snippet id=${id}`)),
+      tap(_ => alert(`deleted snippet id=${id}`)),
       catchError(this.handleError<Snippet>('deleteSnippet'))
     );
   }
 
   /** PUT: update the snippet on the server */
-  updateSnippet(snippet: Snippet, token: string): Observable<any> {
+  updateSnippet(snippet: Snippet, id: number, token: string): Observable<any> {
     const headers = { 'headers':
       {
         'content-type': 'application/json',
         'Authorization': 'Basic ' + token
       }
     };
-    return this.http.put(this.restUrl, snippet, headers).pipe(
-      tap(_ => console.log(`updated snippet id=${snippet.id}`)),
+    console.log(id);
+    const url = `${this.restUrl}${id}/`;
+    return this.http.put<Snippet>(url, snippet, headers).pipe(
+      tap(_ => alert(`updated snippet id=${snippet.id}`)),
       catchError(this.handleError<any>('updateSnippet'))
     );
   }

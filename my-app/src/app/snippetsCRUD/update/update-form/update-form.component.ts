@@ -4,20 +4,21 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SnippetsService } from 'src/app/services/snippetsService/snippets.service';
 
 @Component({
-  selector: 'app-create-form',
-  templateUrl: './create-form.component.html',
-  styleUrls: ['./create-form.component.scss']
+  selector: 'app-update-form',
+  templateUrl: './update-form.component.html',
+  styleUrls: ['./update-form.component.scss']
 })
-export class CreateFormComponent implements OnInit {
-  public createForm: FormGroup;
+export class UpdateFormComponent implements OnInit {
+  public updateForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private snippetsService: SnippetsService) {
-    this.createForm = this.fb.group({
+    private snippetsService: SnippetsService) {
+    this.updateForm = this.fb.group({
+      id: ['', Validators.required], 
       code: ['', [Validators.required, Validators.minLength(4)]],
-      title: ['', Validators.required],
-      language: ['', Validators.required],
-      style: ['', Validators.required],
+      title: [''],
+      language: [''],
+      style: [''],
       token: ['', Validators.required]
     });
   }
@@ -26,17 +27,19 @@ export class CreateFormComponent implements OnInit {
   }
 
   field(fieldname: any) {
-    return this.createForm.get(fieldname);
+    return this.updateForm.get(fieldname);
   }
 
-  createSnippet(formValue: any) {
+  updateSnippet(formValue: any) {
+    const id = formValue['id'];
     const code = formValue['code'];
     const title = formValue['title'];
     const language = formValue['language'];
     const style = formValue['style'];
     const token = formValue['token'];
     const snippet = new Snippet(code, title, false, language, style);
-    this.snippetsService.addSnippet(snippet, token)
+    snippet.id = id;
+    this.snippetsService.updateSnippet(snippet, id, token)
       .subscribe(s => {
         console.log(s);
       });
