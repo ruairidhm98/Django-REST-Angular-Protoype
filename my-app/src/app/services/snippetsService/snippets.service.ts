@@ -1,4 +1,4 @@
-import { Snippet } from './../snippets/snippet';
+import { Snippet } from '../../snippets/snippet';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -75,15 +75,16 @@ export class SnippetsService {
   }
 
   /** DELETE: delete the snippet from the server */
-  deleteSnippet(snippet: Snippet | number, token: string): Observable<Snippet> {
-    const id = typeof snippet === 'number' ? snippet : snippet.id;
-    const url = `${this.restUrl}/${id}`;
+  deleteSnippet(id: number, token: string): Observable<Snippet> {
+    const url = `${this.restUrl}${id}/`;
     const headers = { 'headers':
       {
         'content-type': 'application/json',
         'Authorization': 'Basic ' + token
       }
-    };    return this.http.delete<Snippet>(url, headers).pipe(
+    };    
+    console.log(url);
+    return this.http.delete<Snippet>(url, headers).pipe(
       tap(_ => console.log(`deleted snippet id=${id}`)),
       catchError(this.handleError<Snippet>('deleteSnippet'))
     );
@@ -114,6 +115,9 @@ export class SnippetsService {
 
       // TODO: send the error to remote logging infrastructure
       console.log(error); // log to console instead
+      if (error.status === 404) {
+        alert('There has been an error: 404');
+      }
 
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message}`);

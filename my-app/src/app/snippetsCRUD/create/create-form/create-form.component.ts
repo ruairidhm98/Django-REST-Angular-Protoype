@@ -1,8 +1,7 @@
 import { Snippet } from 'src/app/snippets/snippet';
-import { SnippetsComponent } from './../../../snippets/snippets.component';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SnippetsService } from 'src/app/services/snippets.service';
+import { SnippetsService } from 'src/app/services/snippetsService/snippets.service';
 
 @Component({
   selector: 'app-create-form',
@@ -23,12 +22,11 @@ export class CreateFormComponent implements OnInit {
     });
   }
 
-  field(fieldname) {
-    return this.createForm.get(fieldname);
+  ngOnInit() {
   }
 
-
-  ngOnInit() {
+  field(fieldname: any) {
+    return this.createForm.get(fieldname);
   }
 
   createSnippet(formValue: any) {

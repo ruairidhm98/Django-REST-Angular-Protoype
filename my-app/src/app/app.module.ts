@@ -11,6 +11,7 @@ import { RetrieveComponent } from './snippetsCRUD/retrieve/retrieve.component';
 import { UpdateComponent } from './snippetsCRUD/update/update.component';
 import { DeleteComponent } from './snippetsCRUD/delete/delete.component';
 import { CreateFormComponent } from './snippetsCRUD/create/create-form/create-form.component';
+import { DeleteFormComponent } from './snippetsCRUD/delete/delete-form/delete-form.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { CreateFormComponent } from './snippetsCRUD/create/create-form/create-fo
     UpdateComponent,
     DeleteComponent,
     CreateFormComponent,
+    DeleteFormComponent,
   ],
   bootstrap: [AppComponent]
 })

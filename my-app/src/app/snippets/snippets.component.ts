@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Snippet} from './../snippets/snippet';
-import { SnippetsService } from '../services/snippets.service';
+import { SnippetsService } from '../services/snippetsService/snippets.service';
 
 @Component({
   selector: 'app-snippets',
