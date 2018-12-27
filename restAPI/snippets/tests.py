@@ -68,12 +68,12 @@ class PutRequests(APITestCase):
         self.user = User(username='test')
         self.user.set_password('test')
         self.user.save()
-        self.snippetToUpdate = Snippet(code="print(999)", id=100)
+        self.snippetToUpdate = Snippet(code='print(999)', id=100)
         self.snippetToUpdate.save()
 
     # Unauthroized access, should delete
     def test_put_not_validated(self):
-        request = self.client.post('http://127.0.0.1:8000/snippets/100/', {
+        request = self.client.put('http://127.0.0.1:8000/snippets/100/', {
             'code': 'print(123)',
         })
         self.assertIsNotNone(request)
@@ -82,11 +82,11 @@ class PutRequests(APITestCase):
     # Unauthroized access, should delete
     def test_put_not_validated(self):
         self.client.login(username='test', password='test')
-        request = self.client.post('http://127.0.0.1:8000/snippets/100/', {
+        request = self.client.put('http://127.0.0.1:8000/snippets/100/', {
             'code': 'print(123)',
         })
         self.assertIsNotNone(request)
-        self.assertEqual(request.status_code, 203)
+        self.assertEqual(request.status_code, 200)
 
 # Test cases concerning DELETE requets to the REST API
 class DeleteRequests(APITestCase):
@@ -96,7 +96,7 @@ class DeleteRequests(APITestCase):
         self.user = User(username='test')
         self.user.set_password('test')
         self.user.save()
-        self.snippetToDelete = Snippet(code="print(999)", id=100)
+        self.snippetToDelete = Snippet(code='print(999)', id=100)
         self.snippetToDelete.save()
 
     # Unauthorized access, request should return a 403
