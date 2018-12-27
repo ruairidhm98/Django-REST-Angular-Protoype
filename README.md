@@ -14,5 +14,5 @@ python manage.py createsuperuser
   and password for the superuser
 - Click code (this is directly below the save button)
 - You're code will appear as 'Authorization: Basic "the_code"'
-- Use this to enter in the angular form (the angular code will insert this as a 
+- Use "the_code" to enter in the angular form (the angular code will insert this as a 
   nescessary header) 
