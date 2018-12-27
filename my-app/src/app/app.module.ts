@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SnippetsComponent } from './snippets/snippets.component';
 import { CreateComponent } from './snippetsCRUD/create/create.component';
 import { RetrieveComponent } from './snippetsCRUD/retrieve/retrieve.component';
 import { UpdateComponent } from './snippetsCRUD/update/update.component';
@@ -13,6 +12,7 @@ import { DeleteComponent } from './snippetsCRUD/delete/delete.component';
 import { CreateFormComponent } from './snippetsCRUD/create/create-form/create-form.component';
 import { DeleteFormComponent } from './snippetsCRUD/delete/delete-form/delete-form.component';
 import { UpdateFormComponent } from './snippetsCRUD/update/update-form/update-form.component';
+import { RetrieveFormComponent } from './snippetsCRUD/retrieve/retrieve-form/retrieve-form.component';
 
 @NgModule({
   imports: [
@@ -25,7 +25,6 @@ import { UpdateFormComponent } from './snippetsCRUD/update/update-form/update-fo
   ],
   declarations: [
     AppComponent,
-    SnippetsComponent,
     CreateComponent,
     RetrieveComponent,
     UpdateComponent,
@@ -33,6 +32,7 @@ import { UpdateFormComponent } from './snippetsCRUD/update/update-form/update-fo
     CreateFormComponent,
     DeleteFormComponent,
     UpdateFormComponent,
+    RetrieveFormComponent,
   ],
   bootstrap: [AppComponent]
 })

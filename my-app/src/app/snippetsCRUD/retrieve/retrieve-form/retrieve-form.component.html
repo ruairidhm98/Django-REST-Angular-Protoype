@@ -1,0 +1,30 @@
+<div>
+  <form [formGroup]='retrieveForm' (ngSubmit)='retrieveSnippet(retrieveForm.value)'>
+    <div class="row">
+      <div class="col-12 col-sm-4 col-lg-6">
+        <label>ID</label>
+        <input type="text" 
+               class="form-control"   
+               formControlName="id"         
+               autocomplete="off"   
+               placeholder="">
+        <div class="error" *ngIf="!field('id').valid && field('id').dirty">This field is required</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-4 col-lg-6">
+        <label>Token</label>
+        <input type="text" 
+               class="form-control"   
+               formControlName="token" 
+               autocomplete="off"   
+               placeholder="">
+        <div class="error" *ngIf="!field('token').valid && field('id').dirty">This field is required</div>
+      </div>
+    </div>
+    <br>
+    <button class="btn btn-info" [disabled]="!retrieveForm.valid">Submit</button>
+    <br><br>
+    {{snippet | json}}
+  </form>
+</div>

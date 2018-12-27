@@ -23,9 +23,16 @@ export class SnippetsService {
       );
   }
 
-  getSnippetNo404<Data>(id: number): Observable<Snippet> {
-    const url = `${this.restUrl}/?id=${id}`;
-    return this.http.get<Snippet[]>(url)
+  getSnippetNo404<Data>(id: number, token: string): Observable<Snippet> {
+    const url = `${this.restUrl}?id=${id}`;
+    const headers = {
+      'headers':
+      {
+        'content-type': 'application/json',
+        'Authorization': 'Basic ' + token
+      }
+    }; 
+    return this.http.get<Snippet[]>(url, headers)
       .pipe(
         map(snippet => snippet[0]), // returns a {0|1} element array
         tap(s => {
@@ -37,23 +44,18 @@ export class SnippetsService {
   }
 
   /** GET snippet by id. Will 404 if id not found */
-  getSnippet(id: number): Observable<Snippet> {
-    const url = `${this.restUrl}/${id}`;
-    return this.http.get<Snippet>(url).pipe(
+  getSnippet(id: number, token: string): Observable<Snippet> {
+    const url = `${this.restUrl}${id}`;
+    const headers = {
+      'headers':
+      {
+        'content-type': 'application/json',
+        'Authorization': 'Basic ' + token
+      }
+    }; 
+    return this.http.get<Snippet>(url, headers).pipe(
       tap(_ => console.log(`fetched snippet id=${id}`)),
       catchError(this.handleError<Snippet>(`getSnippet id=${id}`))
-    );
-  }
-
-  /* GET snippets whose name contains search term */
-  searchSnippet(term: string): Observable<Snippet[]> {
-    if (!term.trim()) {
-      // if not search term, return empty snippets array.
-      return of([]);
-    }
-    return this.http.get<Snippet[]>(`${this.restUrl}/?name=${term}`).pipe(
-      tap(_ => console.log(`found snippet matching "${term}"`)),
-      catchError(this.handleError<Snippet[]>('searchSnippets', []))
     );
   }
 

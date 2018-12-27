@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SnippetsComponent } from './snippets.component';
+import { RetrieveFormComponent } from './retrieve-form.component';
 
-describe('SnippetsComponent', () => {
-  let component: SnippetsComponent;
-  let fixture: ComponentFixture<SnippetsComponent>;
+describe('RetrieveFormComponent', () => {
+  let component: RetrieveFormComponent;
+  let fixture: ComponentFixture<RetrieveFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SnippetsComponent ]
+      declarations: [ RetrieveFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SnippetsComponent);
+    fixture = TestBed.createComponent(RetrieveFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
