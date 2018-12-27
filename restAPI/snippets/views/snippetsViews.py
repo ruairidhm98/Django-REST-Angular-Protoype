@@ -1,6 +1,5 @@
 from snippets.models import Snippet
 from snippets.serializers.snippetSerializer import SnippetSerializer
-from snippets.serializers.userSerializer import UserSerializer
 from rest_framework import generics
 from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
