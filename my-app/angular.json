@@ -29,13 +29,12 @@
             "styles": [
               "./src/css/sb-admin.min.css",
               "./src/styles.scss",
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/charts.js/dist/Chart.min.js"
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
               "./src/assets/js/popper.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
             ]
           },
           "configurations": {
@@ -98,7 +97,6 @@
               "./node_modules/jquery/dist/jquery.min.js",
               "./src/assets/js/popper.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "./node_modules/charts.js/dist/Chart.min.js"
             ],
             "assets": [
               "src/favicon.ico",

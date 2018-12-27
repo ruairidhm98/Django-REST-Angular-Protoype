@@ -1,3 +1,4 @@
+import { AppRoutingModule } from './../app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
   ],
   imports: [
     CommonModule,
+    AppRoutingModule
   ],
   exports: [
     MenuComponent,
