@@ -4,7 +4,7 @@ import { MenuComponent } from './menu/menu.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
-import { DropDownComponent } from './drop-down/drop-down.component';
+import { DropDownComponent } from './menu/drop-down/drop-down.component';
 
 @NgModule({
   declarations: [
