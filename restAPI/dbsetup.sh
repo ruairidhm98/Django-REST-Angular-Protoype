@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Makes nescessary database migrations and runs the server
+# Makes nescessary database migrations 
 chmod 700 dbsetup.sh
 python manage.py makemigrations snippets
 python manage.py migrate 
