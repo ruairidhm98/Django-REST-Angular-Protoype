@@ -16,3 +16,6 @@ python manage.py createsuperuser
 - You're code will appear as 'Authorization: Basic "the_code"'
 - Use "the_code" to enter in the angular form (the angular code will insert this as a 
   nescessary header) 
+
+# POST/PUT Requests to API
+- Make sure in the language it is a valid language such as 'python', 'java' etc and for style, make sure it is also valid i.e. 'friendly' (this is cause the values come from a pre-defined list of values, this was in the djangi REST tutorial, otherwise you'll get a 400 (bad request when making a request to the API)
