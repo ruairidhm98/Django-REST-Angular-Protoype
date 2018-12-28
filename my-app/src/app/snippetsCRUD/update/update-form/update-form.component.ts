@@ -14,7 +14,7 @@ export class UpdateFormComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private snippetsService: SnippetsService) {
     this.updateForm = this.fb.group({
-      id: ['', Validators.required], 
+      id: ['', Validators.required],
       code: ['', [Validators.required, Validators.minLength(4)]],
       title: [''],
       language: [''],

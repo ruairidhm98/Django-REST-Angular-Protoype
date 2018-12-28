@@ -31,7 +31,7 @@ export class SnippetsService {
         'content-type': 'application/json',
         'Authorization': 'Basic ' + token
       }
-    }; 
+    };
     return this.http.get<Snippet[]>(url, headers)
       .pipe(
         map(snippet => snippet[0]), // returns a {0|1} element array
@@ -52,7 +52,7 @@ export class SnippetsService {
         'content-type': 'application/json',
         'Authorization': 'Basic ' + token
       }
-    }; 
+    };
     return this.http.get<Snippet>(url, headers).pipe(
       tap(_ => console.log(`fetched snippet id=${id}`)),
       catchError(this.handleError<Snippet>(`getSnippet id=${id}`))
@@ -84,7 +84,7 @@ export class SnippetsService {
         'content-type': 'application/json',
         'Authorization': 'Basic ' + token
       }
-    };    
+    };
     console.log(url);
     return this.http.delete<Snippet>(url, headers).pipe(
       tap(_ => alert(`deleted snippet id=${id}`)),

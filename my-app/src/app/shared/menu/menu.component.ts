@@ -8,10 +8,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
   public pageData = [
-    {"title": "Create", "url": "/create"},
-    {"title": "Retrieve", "url": "/retrieve"},
-    {"title": "Update", "url": "/update"},
-    {"title": "Delete", "url": "/delete"}
+    {'title': 'Create', 'url': '/create'},
+    {'title': 'Retrieve', 'url': '/retrieve'},
+    {'title': 'Update', 'url': '/update'},
+    {'title': 'Delete', 'url': '/delete'}
   ];
 
   constructor(private route: ActivatedRoute,

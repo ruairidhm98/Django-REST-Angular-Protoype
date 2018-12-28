@@ -12,7 +12,7 @@ export class DeleteFormComponent implements OnInit {
   deleteForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private snippetService: SnippetsService) { 
+              private snippetService: SnippetsService) {
     this.deleteForm = this.fb.group({
       id: ['', Validators.required],
       token: ['', Validators.required]
