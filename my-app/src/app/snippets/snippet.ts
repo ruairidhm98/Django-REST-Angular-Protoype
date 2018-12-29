@@ -20,7 +20,10 @@ export class Snippet {
     } else {
       this.language = 'python';
     }
-    this.style = style;
+    /* Just to avoid them 400's */
+    if (style !== 'friendly') {
+      this.style = 'friendly';
+    }
     this.id = nextId++;
   }
 
