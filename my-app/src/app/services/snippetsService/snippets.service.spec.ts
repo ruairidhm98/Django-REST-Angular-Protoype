@@ -1,12 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 
 import { SnippetsService } from './snippets.service';
-
-describe('SnippetsService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
-
-  it('should be created', () => {
-    const service: SnippetsService = TestBed.get(SnippetsService);
-    expect(service).toBeTruthy();
-  });
-});
+import { JsonpCallbackContext } from '@angular/common/http/src/jsonp';
