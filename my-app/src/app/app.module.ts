@@ -1,5 +1,3 @@
-import { HeaderComponent } from './shared/header/header.component';
-import { MenuComponent } from './shared/menu/menu.component';
 import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -35,8 +33,6 @@ import { RetrieveFormComponent } from './snippetsCRUD/retrieve/retrieve-form/ret
     DeleteFormComponent,
     UpdateFormComponent,
     RetrieveFormComponent,
-    MenuComponent,
-    HeaderComponent
   ],
   bootstrap: [AppComponent]
 })
